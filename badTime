@@ -15,7 +15,8 @@ and HISTRA_SDINTESTADO IN ('3','5', '7')
 select *, 
 CASE WHEN (T1.HORA_SOLICITUD between T2.INICIO and T2.FIN and T1.HORA_LLAMADO between t2.INICIO and t2.FIN) 
 then datediff(ss,hora_solicitud, hora_llamado) 
-
+ WHEN (T2.Inicio between T1.HORA_SOLICITUD and t1.HORA_LLAMADO and T2.FIN between T1.HORA_SOLICITUD and t1.HORA_LLAMADO)
+ then DATEDIFF(SS,INICIO,FIN)
 else null end tiempoPerdido from
 (select ID_TURNO, SALA, hora_solicitud, hora_llamado 
 from transacciones where DATEDIFF(SS, HORA_SOLICITUD, HORA_LLAMADO) > 0) T1 
